@@ -1,0 +1,24 @@
+services:
+  h2-db:
+    image: oscarfonts/h2:latest
+    container_name: fincontrol-h2
+    ports:
+      - "1521:1521"
+      - "81:81"
+    environment:
+      - H2_OPTIONS=-ifNotExists
+    volumes:
+      - ./h2-data:/opt/h2-data
+
+  app:
+    build:
+      context: .
+    container_name: fincontrol-app
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:h2:mem:testedb
+      - SPRING_DATASOURCE_USERNAME=sa
+      - SPRING_DATASOURCE_PASSWORD=
+    depends_on:
+      - h2-db

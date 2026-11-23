@@ -34,7 +34,9 @@ build/
 
 ### Database local e temporarios ###
 h2-data/
+mysql-data/
 *.mv.db
 *.trace.db
 corpo.json
+
 
